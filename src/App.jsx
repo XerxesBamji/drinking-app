@@ -234,7 +234,7 @@ function App() {
 
   return (
     <div className="game-container">
-      <h1>Ride The Bus – Neon Edition</h1>
+      <h1>Red or Black</h1>
 
       <div className="info-bar">
         <div><strong>Dealer:</strong> {dealerName}</div>
