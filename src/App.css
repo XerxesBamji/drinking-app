@@ -1,9 +1,14 @@
+/* ============================= */
+/* BASE */
+/* ============================= */
+
 body {
   margin: 0;
   padding: 0;
   font-family: "Segoe UI", sans-serif;
   background: linear-gradient(135deg, #1e1e2f, #2c2c54);
   color: white;
+  overflow-x: hidden;
 }
 
 .game-container {
@@ -16,6 +21,24 @@ h1, h2, h3 {
   margin: 10px 0;
 }
 
+/* ============================= */
+/* TABLE LAYOUT */
+/* ============================= */
+
+.table-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.play-area {
+  flex: 1;
+  text-align: center;
+}
+
 .card-row {
   display: flex;
   justify-content: center;
@@ -23,7 +46,9 @@ h1, h2, h3 {
   margin: 30px 0;
 }
 
-/* ---------- CARD BASE ---------- */
+/* ============================= */
+/* CARD BASE */
+/* ============================= */
 
 .card {
   width: 90px;
@@ -40,8 +65,7 @@ h1, h2, h3 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-/* ---------- REVEALED STATIC CARDS ---------- */
-
+/* Revealed static cards */
 .card.revealed {
   background: white;
   color: black;
@@ -53,7 +77,7 @@ h1, h2, h3 {
   font-weight: bold;
 }
 
-/* ---------- FLIP STRUCTURE ---------- */
+/* Flip structure */
 
 .card-inner {
   width: 100%;
@@ -94,44 +118,9 @@ h1, h2, h3 {
   font-weight: bold;
 }
 
-/* ---------- BUTTONS ---------- */
-
-button {
-  margin: 8px;
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: none;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
-  background: #ff4757;
-  color: white;
-  transition: 0.2s ease;
-}
-
-button:hover {
-  background: #ff6b81;
-  transform: scale(1.05);
-}
-
-button:active {
-  transform: scale(0.98);
-}
-
-input {
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  margin-right: 8px;
-}
-
-.table-area {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin: 30px 0;
-}
+/* ============================= */
+/* DECK */
+/* ============================= */
 
 .deck {
   width: 90px;
@@ -147,28 +136,7 @@ input {
   color: white;
 }
 
-.card.moving {
-  position: relative;
-  animation: slideFromDeck 0.4s ease forwards;
-}
-
-@keyframes slideFromDeck {
-  from {
-    transform: translateX(-140px);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
-
-.current-player {
-  padding: 10px 20px;
-  border-radius: 12px;
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 20px #00ff99;
-}
-
+/* Deck animation */
 .deck-animate {
   animation: deckShrink 0.3s ease;
 }
@@ -179,71 +147,9 @@ input {
   100% { transform: scale(1); }
 }
 
-.discard {
-  width: 90px;
-}
-
-.small {
-  transform: scale(0.8);
-  opacity: 0.7;
-}
-
-.button-area {
-  margin-top: 15px;
-}
-
-.discard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.discard-card {
-  width: 90px;
-  height: 130px;
-  border-radius: 12px;
-  border: 2px solid #111;
-  background: linear-gradient(135deg, #7b0000, #b30000);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  color: white;
-  transform: scale(0.9);
-  opacity: 0.85;
-}
-
-.discard-label {
-  font-size: 12px;
-  opacity: 0.7;
-  letter-spacing: 1px;
-}
-
-.table-area {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 40px;
-  margin: 40px auto;
-  max-width: 900px;
-}
-
-.play-area {
-  flex: 1;
-  text-align: center;
-}
-
-.question {
-  margin-top: 20px;
-}
-
-.button-area {
-  margin-top: 15px;
-}
-
-/* -------- DISCARD STACK -------- */
+/* ============================= */
+/* DISCARD STACK */
+/* ============================= */
 
 .discard {
   display: flex;
@@ -295,7 +201,9 @@ input {
   letter-spacing: 1px;
 }
 
-/* -------- SLIDE TO DISCARD -------- */
+/* ============================= */
+/* SLIDE TO DISCARD */
+/* ============================= */
 
 .to-discard {
   animation: slideToDiscard 0.5s ease forwards;
@@ -303,10 +211,68 @@ input {
 
 @keyframes slideToDiscard {
   to {
-    transform: translateX(350px) scale(0.7);
+    transform: translateX(250px) scale(0.7);
     opacity: 0;
   }
 }
+
+/* ============================= */
+/* BUTTONS */
+/* ============================= */
+
+button {
+  margin: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #ff4757;
+  color: white;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: #ff6b81;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.button-area {
+  margin-top: 20px;
+}
+
+/* ============================= */
+/* INPUT */
+/* ============================= */
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  margin-right: 8px;
+  font-size: 16px; /* prevents iOS zoom */
+}
+
+/* ============================= */
+/* CURRENT PLAYER */
+/* ============================= */
+
+.current-player {
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0,255,150,0.6);
+}
+
+/* ============================= */
+/* ALERT */
+/* ============================= */
 
 .custom-alert {
   position: fixed;
@@ -323,12 +289,10 @@ input {
 
 .custom-alert.success {
   background: #2ed573;
-  color: white;
 }
 
 .custom-alert.danger {
   background: #ff4757;
-  color: white;
 }
 
 @keyframes slideUp {
@@ -350,50 +314,15 @@ input {
 }
 
 /* ============================= */
-/* MOBILE RESPONSIVENESS */
+/* MOBILE */
 /* ============================= */
 
 @media (max-width: 768px) {
 
-  body {
-    overflow-x: hidden;
-  }
-
-  .game-container,
-  .setup-container {
-    padding: 20px 16px;
-  }
-
-  h1 {
-    font-size: 22px;
-    text-align: center;
-  }
-
-  /* Info Bar */
-  .info-bar {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
-    font-size: 14px;
-  }
-
-  /* Table layout */
   .table-area {
     flex-direction: column;
     align-items: center;
     gap: 25px;
-  }
-
-  .deck-area,
-  .discard-area {
-    align-items: center;
-  }
-
-  /* Cards */
-  .card-row {
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 10px;
   }
 
   .card {
@@ -401,44 +330,20 @@ input {
     height: 115px;
   }
 
-  /* Buttons */
+  .card-row {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
   .button-area {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 12px;
-    margin-top: 20px;
   }
 
-  .neon-btn {
+  button {
     width: 100%;
-    padding: 14px;
-    font-size: 16px;
-  }
-
-  /* Setup screen */
-  .player-input-row {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .player-input-row input {
-    width: 100%;
-  }
-
-  .player-input-row button {
-    width: 100%;
-  }
-
-  .player-row {
-    flex-direction: column;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .start-button {
-    width: 100%;
-    margin-top: 20px;
   }
 
 }
