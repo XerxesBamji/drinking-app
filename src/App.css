@@ -1,0 +1,350 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+  color: white;
+}
+
+.game-container {
+  min-height: 100vh;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+h1, h2, h3 {
+  margin: 10px 0;
+}
+
+.card-row {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+/* ---------- CARD BASE ---------- */
+
+.card {
+  width: 90px;
+  height: 130px;
+  perspective: 1000px;
+}
+
+/* shared card appearance */
+.card-front,
+.card-back,
+.card.revealed {
+  border-radius: 12px;
+  border: 2px solid #111;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- REVEALED STATIC CARDS ---------- */
+
+.card.revealed {
+  background: white;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* ---------- FLIP STRUCTURE ---------- */
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.card.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Card back design */
+.card-front {
+  background: linear-gradient(135deg, #7b0000, #b30000);
+  color: white;
+  font-size: 32px;
+}
+
+/* Card face */
+.card-back {
+  background: white;
+  transform: rotateY(180deg);
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* ---------- BUTTONS ---------- */
+
+button {
+  margin: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: none;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #ff4757;
+  color: white;
+  transition: 0.2s ease;
+}
+
+button:hover {
+  background: #ff6b81;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+input {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  margin-right: 8px;
+}
+
+.table-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 30px 0;
+}
+
+.deck {
+  width: 90px;
+  height: 130px;
+  background: linear-gradient(135deg, #7b0000, #b30000);
+  border-radius: 12px;
+  border: 2px solid #111;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 32px;
+  color: white;
+}
+
+.card.moving {
+  position: relative;
+  animation: slideFromDeck 0.4s ease forwards;
+}
+
+@keyframes slideFromDeck {
+  from {
+    transform: translateX(-140px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.current-player {
+  padding: 10px 20px;
+  border-radius: 12px;
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 20px #00ff99;
+}
+
+.deck-animate {
+  animation: deckShrink 0.3s ease;
+}
+
+@keyframes deckShrink {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.discard {
+  width: 90px;
+}
+
+.small {
+  transform: scale(0.8);
+  opacity: 0.7;
+}
+
+.button-area {
+  margin-top: 15px;
+}
+
+.discard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.discard-card {
+  width: 90px;
+  height: 130px;
+  border-radius: 12px;
+  border: 2px solid #111;
+  background: linear-gradient(135deg, #7b0000, #b30000);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: white;
+  transform: scale(0.9);
+  opacity: 0.85;
+}
+
+.discard-label {
+  font-size: 12px;
+  opacity: 0.7;
+  letter-spacing: 1px;
+}
+
+.table-area {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  margin: 40px auto;
+  max-width: 900px;
+}
+
+.play-area {
+  flex: 1;
+  text-align: center;
+}
+
+.question {
+  margin-top: 20px;
+}
+
+.button-area {
+  margin-top: 15px;
+}
+
+/* -------- DISCARD STACK -------- */
+
+.discard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+
+.discard-stack {
+  position: relative;
+  width: 90px;
+  height: 130px;
+}
+
+.discard-card {
+  position: absolute;
+  width: 90px;
+  height: 130px;
+  border-radius: 12px;
+  border: 2px solid #111;
+  background: linear-gradient(135deg, #7b0000, #b30000);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+}
+
+.offset-1 {
+  top: 4px;
+  left: 4px;
+  opacity: 0.6;
+}
+
+.offset-2 {
+  top: 2px;
+  left: 2px;
+  opacity: 0.8;
+}
+
+.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 28px;
+  color: white;
+}
+
+.discard-label {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 8px;
+  letter-spacing: 1px;
+}
+
+/* -------- SLIDE TO DISCARD -------- */
+
+.to-discard {
+  animation: slideToDiscard 0.5s ease forwards;
+}
+
+@keyframes slideToDiscard {
+  to {
+    transform: translateX(350px) scale(0.7);
+    opacity: 0;
+  }
+}
+
+.custom-alert {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px 30px;
+  border-radius: 14px;
+  font-weight: bold;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  animation: slideUp 0.3s ease, fadeOut 0.3s ease 1.9s forwards;
+  z-index: 1000;
+}
+
+.custom-alert.success {
+  background: #2ed573;
+  color: white;
+}
+
+.custom-alert.danger {
+  background: #ff4757;
+  color: white;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translate(-50%, 20px);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+}
