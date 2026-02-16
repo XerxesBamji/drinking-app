@@ -348,3 +348,97 @@ input {
     transform: translate(-50%, 10px);
   }
 }
+
+/* ============================= */
+/* MOBILE RESPONSIVENESS */
+/* ============================= */
+
+@media (max-width: 768px) {
+
+  body {
+    overflow-x: hidden;
+  }
+
+  .game-container,
+  .setup-container {
+    padding: 20px 16px;
+  }
+
+  h1 {
+    font-size: 22px;
+    text-align: center;
+  }
+
+  /* Info Bar */
+  .info-bar {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  /* Table layout */
+  .table-area {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+
+  .deck-area,
+  .discard-area {
+    align-items: center;
+  }
+
+  /* Cards */
+  .card-row {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .card {
+    width: 80px;
+    height: 115px;
+  }
+
+  /* Buttons */
+  .button-area {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+    margin-top: 20px;
+  }
+
+  .neon-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+  }
+
+  /* Setup screen */
+  .player-input-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .player-input-row input {
+    width: 100%;
+  }
+
+  .player-input-row button {
+    width: 100%;
+  }
+
+  .player-row {
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .start-button {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+}
