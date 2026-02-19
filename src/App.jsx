@@ -92,7 +92,7 @@ function App() {
         setRevealed(prev => [...prev, card]);
 
         if (nextStageIfCorrect === 5) {
-          showAlert(`${currentPlayer} completed the row! 🎉`, "success");
+          showAlert(`${currentPlayer} completed the row! 🎉 ${dealerName} downs their drink`, "success");
 
           setTimeout(() => {
             setRevealed([]);
