@@ -239,7 +239,7 @@ function App() {
               <img src={logo} alt="Red or Black Logo" className="game-logo game-logo-small" />
             </div>
 
-            <div className="flex flex-row justify-between items-center md:items-start md:gap-10 gap-2">
+            <div className="flex md:flex-row flex-col justify-between items-center md:items-start md:gap-10 gap-6">
 
               <div>
                 <div className="deck">🂠</div>
@@ -281,7 +281,7 @@ function App() {
 
             </div>
 
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-3 md:mt-0 mt-6">
                   {stage === 1 && (
                     <>
                       <button onClick={() => handleColorGuess("red")}>Red</button>
