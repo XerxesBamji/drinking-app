@@ -169,7 +169,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-start justify-center px-4">
       <div className="w-full max-w-[1100px]">
 
         {!gameStarted ? (
@@ -272,10 +272,10 @@ function App() {
               <div>
                 <div className="discard-stack">
                   {discard.length > 0 && (
-                    <div className="discard-card top">{discard.length}</div>
+                    <div className="discard-card top">🂠</div>
                   )}
                 </div>
-                <div className="text-xs opacity-70 mt-2">DISCARD</div>
+                <div className="text-xs opacity-70 mt-2">DISCARD ({discard.length})</div>
               </div>
               
 
