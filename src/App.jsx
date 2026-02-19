@@ -4,13 +4,11 @@ import logo from "./assets/logo.png";
 import "./App.css";
 
 function App() {
-  // ---------------- SETUP STATE ----------------
   const [players, setPlayers] = useState([]);
   const [dealerIndex, setDealerIndex] = useState(null);
   const [newPlayerName, setNewPlayerName] = useState("");
   const [gameStarted, setGameStarted] = useState(false);
 
-  // ---------------- GAME STATE ----------------
   const [deck, setDeck] = useState([]);
   const [revealed, setRevealed] = useState([]);
   const [activeCard, setActiveCard] = useState(null);
@@ -24,11 +22,9 @@ function App() {
   const currentPlayer = players[currentPlayerIndex];
   const dealerName = players[dealerIndex];
 
-  // ---------------- PLAYER SETUP ----------------
-
   function addPlayer() {
     if (!newPlayerName.trim()) return;
-    setPlayers(prev => [...prev, newPlayerName.trim()]);
+    setPlayers((prev) => [...prev, newPlayerName.trim()]);
     setNewPlayerName("");
   }
 
@@ -36,7 +32,6 @@ function App() {
     if (players.length < 2) return;
 
     let finalDealer = dealerIndex;
-
     if (finalDealer === null) {
       finalDealer = Math.floor(Math.random() * players.length);
       setDealerIndex(finalDealer);
@@ -46,36 +41,27 @@ function App() {
     setDeck(shuffled);
 
     const firstPlayer = (finalDealer + 1) % players.length;
-
     setCurrentPlayerIndex(firstPlayer);
     setGameStarted(true);
   }
 
   function nextPlayer() {
     let next = (currentPlayerIndex + 1) % players.length;
-
-    if (next === dealerIndex) {
-      next = (next + 1) % players.length;
-    }
+    if (next === dealerIndex) next = (next + 1) % players.length;
 
     setCurrentPlayerIndex(next);
     setRevealed([]);
     setStage(1);
   }
 
-  // ---------------- CARD LOGIC ----------------
-
   function drawCard() {
     if (deck.length === 0) return null;
-
     const newDeck = [...deck];
     const card = newDeck.shift();
     setDeck(newDeck);
-
     setActiveCard(card);
     setFlipped(false);
     setTimeout(() => setFlipped(true), 50);
-
     return card;
   }
 
@@ -89,11 +75,10 @@ function App() {
 
     setTimeout(() => {
       if (correct) {
-        setRevealed(prev => [...prev, card]);
+        setRevealed((prev) => [...prev, card]);
 
         if (nextStageIfCorrect === 5) {
-          showAlert(`${currentPlayer} completed the row! 🎉 ${dealerName} downs their drink`, "success");
-
+          showAlert(`${currentPlayer} completed the row! 🎉`, "success");
           setTimeout(() => {
             setRevealed([]);
             setStage(1);
@@ -103,9 +88,8 @@ function App() {
           setStage(nextStageIfCorrect);
         }
       } else {
-        setDiscard(prev => [...prev, ...revealed, card]);
+        setDiscard((prev) => [...prev, ...revealed, card]);
         showAlert(`${currentPlayer} drinks 2! 🍺`, "danger");
-
         setTimeout(() => {
           setRevealed([]);
           setStage(1);
@@ -117,8 +101,6 @@ function App() {
       setIsResolving(false);
     }, 900);
   }
-
-  // ---------------- GAME STAGES ----------------
 
   function handleColorGuess(color) {
     if (isResolving) return;
@@ -166,8 +148,6 @@ function App() {
     resolveCard(card, card.suit === suit, 5);
   }
 
-  // ---------------- CARD RENDER ----------------
-
   function renderCardFace(card) {
     const suits = {
       hearts: "♥",
@@ -176,7 +156,7 @@ function App() {
       spades: "♠",
     };
 
-    const color = card.color === "red" ? "#ff004c" : "#111"; // FIXED black
+    const color = card.color === "red" ? "#ff004c" : "#111";
 
     return (
       <>
@@ -188,164 +168,160 @@ function App() {
     );
   }
 
-  // ---------------- SETUP SCREEN ----------------
-  
   return (
-  <div className="app">
+    <div className="min-h-screen flex items-center justify-center px-4">
+      <div className="w-full max-w-[1100px]">
 
-    {!gameStarted ? (
+        {!gameStarted ? (
+          <div className="flex flex-col items-center max-w-[500px] mx-auto">
 
-      // ---------------- SETUP SCREEN ----------------
-      <div className="setup-container">
-        <div className="logo-wrapper">
-          <img src={logo} alt="Red or Black Logo" className="game-logo" />
-        </div>
-        <p className="setup-helper">
-          Tap a player to choose dealer (or leave blank for random).
-        </p>
-
-        <div className="player-input-row">
-          <input
-            value={newPlayerName}
-            placeholder="Enter player name"
-            onChange={(e) => setNewPlayerName(e.target.value)}
-          />
-          <button className="neon-btn" onClick={addPlayer}>
-            Add
-          </button>
-        </div>
-
-        <div className="player-list">
-          {players.map((p, i) => (
-            <div
-              key={i}
-              className={`player-row ${dealerIndex === i ? "selected" : ""}`}
-              onClick={() => setDealerIndex(i)}
-            >
-            
-              <div className="player-left">
-                <span className="player-name">{p}</span>
-
-                {dealerIndex === i && (
-                  <span className="dealer-badge">Dealer</span>
-                )}
-              </div>
-
-              <span
-                className="remove-player"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setPlayers(players.filter((_, index) => index !== i));
-                  if (dealerIndex === i) setDealerIndex(null);
-                }}
-              >
-                ✕
-              </span>
+            <div className="logo-wrapper">
+              <img src={logo} alt="Red or Black Logo" className="game-logo" />
             </div>
-          ))}
-        </div>
 
-        <button
-          className="start-button neon-btn"
-          onClick={startGame}
-          disabled={players.length < 2}
-        >
-          Start Game
-        </button>
-      </div>
+            <p className="text-sm opacity-70 mt-2">
+              Tap a player to choose dealer (or leave blank for random)
+            </p>
 
-    ) : (
-
-      // ---------------- GAME SCREEN ----------------
-      <div className="game-container">
-        <div className="logo-wrapper">
-          <img src={logo} alt="Red or Black Logo" className="game-logo" />
-        </div>
-
-        <div className="info-bar">
-          <div><strong>Dealer:</strong> {dealerName}</div>
-          <div><strong>Current Player:</strong> {currentPlayer}</div>
-        </div>
-
-        <div className="table-area">
-          <div className="deck-area">
-            <div className="deck">🂠</div>
-            <div className="pile-label">
-              DECK ({deck.length})
+            <div className="flex w-full gap-2 mt-6">
+              <input
+                  className="flex-1 rounded-2xl border-2 border-white px-3 py-2"
+                  value={newPlayerName}
+                  placeholder="Enter player name"
+                  onChange={(e) => setNewPlayerName(e.target.value)}
+                  id="playerName"
+                  name="playerName"
+                />
+              <button onClick={addPlayer}>Add</button>
             </div>
-          </div>
 
-          <div className="play-area">
-            <div className="card-row">
-              {revealed.map((card, i) => (
-                <div key={i} className="card revealed">
-                  {renderCardFace(card)}
+            <div className="w-full mt-6">
+              {players.map((p, i) => (
+                <div
+                  key={i}
+                  className={`player-row ${dealerIndex === i ? "selected" : ""}`}
+                  onClick={() => setDealerIndex(i)}
+                >
+                  <div className="player-left">
+                    <span className="player-name">{p}</span>
+                    {dealerIndex === i && (
+                      <span className="dealer-badge">Dealer</span>
+                    )}
+                  </div>
+
+                  <span
+                    className="remove-player"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setPlayers(players.filter((_, index) => index !== i));
+                      if (dealerIndex === i) setDealerIndex(null);
+                    }}
+                  >
+                    ✕
+                  </span>
                 </div>
               ))}
+            </div>
 
-              {activeCard && (
-                <div className={`card ${flipped ? "flip" : ""}`}>
-                  <div className="card-inner">
-                    <div className="card-front">🂠</div>
-                    <div className="card-back">
-                      {renderCardFace(activeCard)}
-                    </div>
-                  </div>
+            <button
+              className="start-button w-full mt-6"
+              onClick={startGame}
+              disabled={players.length < 2}
+            >
+              Start Game
+            </button>
+
+          </div>
+        ) : (
+          <div className="text-center">
+
+            <div className="logo-wrapper mb-6">
+              <img src={logo} alt="Red or Black Logo" className="game-logo game-logo-small" />
+            </div>
+
+            <div className="flex flex-row justify-between items-center md:items-start md:gap-10 gap-2">
+
+              <div>
+                <div className="deck">🂠</div>
+                <div className="text-xs opacity-70 mt-2">
+                  DECK ({deck.length})
                 </div>
-              )}
+              </div>
+
+              <div className="flex-1 text-center">
+                <div className="flex justify-center gap-4 flex-wrap mb-6">
+                  {revealed.map((card, i) => (
+                    <div key={i} className="card revealed">
+                      {renderCardFace(card)}
+                    </div>
+                  ))}
+
+                  {activeCard && (
+                    <div className={`card ${flipped ? "flip" : ""}`}>
+                      <div className="card-inner">
+                        <div className="card-front">🂠</div>
+                        <div className="card-back">
+                          {renderCardFace(activeCard)}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              <div>
+                <div className="discard-stack">
+                  {discard.length > 0 && (
+                    <div className="discard-card top">{discard.length}</div>
+                  )}
+                </div>
+                <div className="text-xs opacity-70 mt-2">DISCARD</div>
+              </div>
+              
+
             </div>
 
-            <div className="button-area">
-              {stage === 1 && (
-                <>
-                  <button className="neon-btn red" onClick={() => handleColorGuess("red")}>Red</button>
-                  <button className="neon-btn black" onClick={() => handleColorGuess("black")}>Black</button>
-                </>
-              )}
-              {stage === 2 && (
-                <>
-                  <button className="neon-btn red" onClick={() => handleHigherLower("higher")}>Higher</button>
-                  <button className="neon-btn red" onClick={() => handleHigherLower("lower")}>Lower</button>
-                </>
-              )}
-              {stage === 3 && (
-                <>
-                  <button className="neon-btn red" onClick={() => handleInsideOutside("inside")}>Inside</button>
-                  <button className="neon-btn red" onClick={() => handleInsideOutside("outside")}>Outside</button>
-                </>
-              )}
-              {stage === 4 && (
-                <>
-                  <button className="neon-btn red" onClick={() => handleSuitGuess("hearts")}>♥</button>
-                  <button className="neon-btn red" onClick={() => handleSuitGuess("diamonds")}>♦</button>
-                  <button className="neon-btn red" onClick={() => handleSuitGuess("clubs")}>♣</button>
-                  <button className="neon-btn red" onClick={() => handleSuitGuess("spades")}>♠</button>
-                </>
-              )}
-            </div>
-          </div>
+            <div className="flex flex-wrap justify-center gap-3">
+                  {stage === 1 && (
+                    <>
+                      <button onClick={() => handleColorGuess("red")}>Red</button>
+                      <button onClick={() => handleColorGuess("black")} className="btn-black">Black</button>
+                    </>
+                  )}
+                  {stage === 2 && (
+                    <>
+                      <button onClick={() => handleHigherLower("higher")}>Higher</button>
+                      <button onClick={() => handleHigherLower("lower")}>Lower</button>
+                    </>
+                  )}
+                  {stage === 3 && (
+                    <>
+                      <button onClick={() => handleInsideOutside("inside")}>Inside</button>
+                      <button onClick={() => handleInsideOutside("outside")}>Outside</button>
+                    </>
+                  )}
+                  {stage === 4 && (
+                    <>
+                      <button onClick={() => handleSuitGuess("hearts")}>♥</button>
+                      <button onClick={() => handleSuitGuess("diamonds")}>♦</button>
+                      <button onClick={() => handleSuitGuess("clubs")}>♣</button>
+                      <button onClick={() => handleSuitGuess("spades")}>♠</button>
+                    </>
+                  )}
+                </div>
 
-          <div className="discard-area">
-            <div className="discard-stack">
-              {discard.length > 0 && (
-                <div className="discard-card top">{discard.length}</div>
-              )}
-            </div>
-            <div className="pile-label">DISCARD</div>
-          </div>
-        </div>
+            {alert && (
+              <div className={`custom-alert ${alert.type}`}>
+                {alert.message}
+              </div>
+            )}
 
-        {alert && (
-          <div className={`custom-alert ${alert.type}`}>
-            {alert.message}
           </div>
         )}
+
       </div>
-
-    )}
-
-  </div>
-);
+    </div>
+  );
 }
 
 export default App;
