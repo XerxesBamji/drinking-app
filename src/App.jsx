@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { createDeck, shuffleDeck } from "./game/deck";
+import logo from "./assets/logo.png";
 import "./App.css";
 
 function App() {
@@ -188,11 +189,20 @@ function App() {
   }
 
   // ---------------- SETUP SCREEN ----------------
+  
+  return (
+  <div className="app">
 
-  if (!gameStarted) {
-    return (
+    {!gameStarted ? (
+
+      // ---------------- SETUP SCREEN ----------------
       <div className="setup-container">
-        <h1>Red or Black</h1>
+        <div className="logo-wrapper">
+          <img src={logo} alt="Red or Black Logo" className="game-logo" />
+        </div>
+        <p className="setup-helper">
+          Tap a player to choose dealer (or leave blank for random)
+        </p>
 
         <div className="player-input-row">
           <input
@@ -207,14 +217,30 @@ function App() {
 
         <div className="player-list">
           {players.map((p, i) => (
-            <div key={i} className="player-row">
-              <span>{p}</span>
-              <button
-                className="neon-btn"
-                onClick={() => setDealerIndex(i)}
+            <div
+              key={i}
+              className={`player-row ${dealerIndex === i ? "selected" : ""}`}
+              onClick={() => setDealerIndex(i)}
+            >
+            
+              <div className="player-left">
+                <span className="player-name">{p}</span>
+
+                {dealerIndex === i && (
+                  <span className="dealer-badge">Dealer</span>
+                )}
+              </div>
+
+              <span
+                className="remove-player"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPlayers(players.filter((_, index) => index !== i));
+                  if (dealerIndex === i) setDealerIndex(null);
+                }}
               >
-                {dealerIndex === i ? "Dealer ✓" : "Make Dealer"}
-              </button>
+                ✕
+              </span>
             </div>
           ))}
         </div>
@@ -227,98 +253,99 @@ function App() {
           Start Game
         </button>
       </div>
-    );
-  }
 
-  // ---------------- GAME SCREEN ----------------
+    ) : (
 
-  return (
-    <div className="game-container">
-      <h1>Red or Black</h1>
-
-      <div className="info-bar">
-        <div><strong>Dealer:</strong> {dealerName}</div>
-        <div><strong>Current Player:</strong> {currentPlayer}</div>
-      </div>
-
-      <div className="table-area">
-        {/* DECK */}
-        <div className="deck-area">
-          <div className="deck">🂠</div>
-          <div className="pile-label">
-            DECK ({deck.length})
-          </div>
+      // ---------------- GAME SCREEN ----------------
+      <div className="game-container">
+        <div className="logo-wrapper">
+          <img src={logo} alt="Red or Black Logo" className="game-logo" />
         </div>
 
-        {/* PLAY AREA */}
-        <div className="play-area">
-          <div className="card-row">
-            {revealed.map((card, i) => (
-              <div key={i} className="card revealed">
-                {renderCardFace(card)}
-              </div>
-            ))}
+        <div className="info-bar">
+          <div><strong>Dealer:</strong> {dealerName}</div>
+          <div><strong>Current Player:</strong> {currentPlayer}</div>
+        </div>
 
-            {activeCard && (
-              <div className={`card ${flipped ? "flip" : ""}`}>
-                <div className="card-inner">
-                  <div className="card-front">🂠</div>
-                  <div className="card-back">
-                    {renderCardFace(activeCard)}
+        <div className="table-area">
+          <div className="deck-area">
+            <div className="deck">🂠</div>
+            <div className="pile-label">
+              DECK ({deck.length})
+            </div>
+          </div>
+
+          <div className="play-area">
+            <div className="card-row">
+              {revealed.map((card, i) => (
+                <div key={i} className="card revealed">
+                  {renderCardFace(card)}
+                </div>
+              ))}
+
+              {activeCard && (
+                <div className={`card ${flipped ? "flip" : ""}`}>
+                  <div className="card-inner">
+                    <div className="card-front">🂠</div>
+                    <div className="card-back">
+                      {renderCardFace(activeCard)}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
+
+            <div className="button-area">
+              {stage === 1 && (
+                <>
+                  <button className="neon-btn" onClick={() => handleColorGuess("red")}>Red</button>
+                  <button className="neon-btn" onClick={() => handleColorGuess("black")}>Black</button>
+                </>
+              )}
+              {stage === 2 && (
+                <>
+                  <button className="neon-btn" onClick={() => handleHigherLower("higher")}>Higher</button>
+                  <button className="neon-btn" onClick={() => handleHigherLower("lower")}>Lower</button>
+                </>
+              )}
+              {stage === 3 && (
+                <>
+                  <button className="neon-btn" onClick={() => handleInsideOutside("inside")}>Inside</button>
+                  <button className="neon-btn" onClick={() => handleInsideOutside("outside")}>Outside</button>
+                </>
+              )}
+              {stage === 4 && (
+                <>
+                  <button className="neon-btn" onClick={() => handleSuitGuess("hearts")}>♥</button>
+                  <button className="neon-btn" onClick={() => handleSuitGuess("diamonds")}>♦</button>
+                  <button className="neon-btn" onClick={() => handleSuitGuess("clubs")}>♣</button>
+                  <button className="neon-btn" onClick={() => handleSuitGuess("spades")}>♠</button>
+                </>
+              )}
+            </div>
           </div>
 
-          <div className="button-area">
-            {stage === 1 && (
-              <>
-                <button className="neon-btn" onClick={() => handleColorGuess("red")}>Red</button>
-                <button className="neon-btn" onClick={() => handleColorGuess("black")}>Black</button>
-              </>
-            )}
-            {stage === 2 && (
-              <>
-                <button className="neon-btn" onClick={() => handleHigherLower("higher")}>Higher</button>
-                <button className="neon-btn" onClick={() => handleHigherLower("lower")}>Lower</button>
-              </>
-            )}
-            {stage === 3 && (
-              <>
-                <button className="neon-btn" onClick={() => handleInsideOutside("inside")}>Inside</button>
-                <button className="neon-btn" onClick={() => handleInsideOutside("outside")}>Outside</button>
-              </>
-            )}
-            {stage === 4 && (
-              <>
-                <button className="neon-btn" onClick={() => handleSuitGuess("hearts")}>♥</button>
-                <button className="neon-btn" onClick={() => handleSuitGuess("diamonds")}>♦</button>
-                <button className="neon-btn" onClick={() => handleSuitGuess("clubs")}>♣</button>
-                <button className="neon-btn" onClick={() => handleSuitGuess("spades")}>♠</button>
-              </>
-            )}
+          <div className="discard-area">
+            <div className="discard-stack">
+              {discard.length > 0 && (
+                <div className="discard-card top">{discard.length}</div>
+              )}
+            </div>
+            <div className="pile-label">DISCARD</div>
           </div>
         </div>
 
-        {/* DISCARD */}
-        <div className="discard-area">
-          <div className="discard-stack">
-            {discard.length > 0 && (
-              <div className="discard-card top">{discard.length}</div>
-            )}
+        {alert && (
+          <div className={`custom-alert ${alert.type}`}>
+            {alert.message}
           </div>
-          <div className="pile-label">DISCARD</div>
-        </div>
+        )}
       </div>
 
-      {alert && (
-        <div className={`custom-alert ${alert.type}`}>
-          {alert.message}
-        </div>
-      )}
-    </div>
-  );
+    )}
+
+  </div>
+);
 }
 
 export default App;
