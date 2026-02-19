@@ -516,6 +516,12 @@ input {
   width: 50%;
 }
 
+@media (max-width: 768px) {
+  .app {
+    align-items: flex-start;
+  }
+}
+
 @media (max-width: 480px) {
   .game-logo {
     width: 180px;
