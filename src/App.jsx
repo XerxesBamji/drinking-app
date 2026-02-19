@@ -201,7 +201,7 @@ function App() {
           <img src={logo} alt="Red or Black Logo" className="game-logo" />
         </div>
         <p className="setup-helper">
-          Tap a player to choose dealer (or leave blank for random)
+          Tap a player to choose dealer (or leave blank for random).
         </p>
 
         <div className="player-input-row">
@@ -298,28 +298,28 @@ function App() {
             <div className="button-area">
               {stage === 1 && (
                 <>
-                  <button className="neon-btn" onClick={() => handleColorGuess("red")}>Red</button>
-                  <button className="neon-btn" onClick={() => handleColorGuess("black")}>Black</button>
+                  <button className="neon-btn red" onClick={() => handleColorGuess("red")}>Red</button>
+                  <button className="neon-btn black" onClick={() => handleColorGuess("black")}>Black</button>
                 </>
               )}
               {stage === 2 && (
                 <>
-                  <button className="neon-btn" onClick={() => handleHigherLower("higher")}>Higher</button>
-                  <button className="neon-btn" onClick={() => handleHigherLower("lower")}>Lower</button>
+                  <button className="neon-btn red" onClick={() => handleHigherLower("higher")}>Higher</button>
+                  <button className="neon-btn red" onClick={() => handleHigherLower("lower")}>Lower</button>
                 </>
               )}
               {stage === 3 && (
                 <>
-                  <button className="neon-btn" onClick={() => handleInsideOutside("inside")}>Inside</button>
-                  <button className="neon-btn" onClick={() => handleInsideOutside("outside")}>Outside</button>
+                  <button className="neon-btn red" onClick={() => handleInsideOutside("inside")}>Inside</button>
+                  <button className="neon-btn red" onClick={() => handleInsideOutside("outside")}>Outside</button>
                 </>
               )}
               {stage === 4 && (
                 <>
-                  <button className="neon-btn" onClick={() => handleSuitGuess("hearts")}>♥</button>
-                  <button className="neon-btn" onClick={() => handleSuitGuess("diamonds")}>♦</button>
-                  <button className="neon-btn" onClick={() => handleSuitGuess("clubs")}>♣</button>
-                  <button className="neon-btn" onClick={() => handleSuitGuess("spades")}>♠</button>
+                  <button className="neon-btn red" onClick={() => handleSuitGuess("hearts")}>♥</button>
+                  <button className="neon-btn red" onClick={() => handleSuitGuess("diamonds")}>♦</button>
+                  <button className="neon-btn red" onClick={() => handleSuitGuess("clubs")}>♣</button>
+                  <button className="neon-btn red" onClick={() => handleSuitGuess("spades")}>♠</button>
                 </>
               )}
             </div>

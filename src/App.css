@@ -91,6 +91,8 @@ h1, h2, h3 {
   align-items: center;
   font-size: 22px;
   font-weight: bold;
+  outline-offset: -9.5px;
+  outline: 2px solid #d1d1d1;
 }
 
 /* Flip structure */
@@ -244,19 +246,45 @@ button {
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
-  background: #ff4757;
   color: white;
   transition: 0.2s ease;
+  background-color: #7b0000;
+  border: 2px solid #7b0000;
 }
 
-button:hover {
-  background: #ff6b81;
+button.red {
+  background: #7b0000;
+}
+
+button.black {
+  background: transparent;
+  border: 2px solid white ;
+}
+
+button.red:hover {
+  background: #ba1d1d;
+  border: 2px solid #ba1d1d;
   transform: scale(1.05);
 }
 
-button:active {
-  transform: scale(0.98);
+button.black:hover {
+  background: #0b0503;
+  border: 2px solid #0b0503;
 }
+
+button.start-button {
+  background: #28ae60;
+  border: 2px solid #28ae60;
+}
+
+button.start-button:hover {
+  background: #2ed573;
+  border: 2px solid #2ed573;
+}
+
+/* button:active {
+  transform: scale(0.98);
+} */
 
 .button-area {
   margin-top: 20px;
