@@ -245,7 +245,7 @@ function App() {
               <img src={logo} alt="Red or Black Logo" className="game-logo game-logo-small" />
             </div>
 
-            <div className="text-sm opacity-80 mb-4">
+            <div className="text-sm opacity-80 my-6">
               {dealerName && (
                 <div>
                   <span className="opacity-70">Dealer: </span>
@@ -270,7 +270,7 @@ function App() {
               </div>
 
               <div className="flex-1 text-center col-span-2 row-start-2 md:row-auto md:col-span-auto">
-                <div className="flex justify-center gap-4 flex-wrap mb-6">
+                <div className="flex justify-center gap-4 flex-wrap my-6">
                   {revealed.map((card, i) => (
                     <div key={i} className="card revealed">
                       {renderCardFace(card)}
