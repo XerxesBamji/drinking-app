@@ -157,15 +157,49 @@ function App() {
       spades: "♠",
     };
 
-    const color = card.color === "red" ? "#ff004c" : "#111";
+    const isFaceCard = ["J", "Q", "K"].includes(card.name);
+    const isAce = card.name === "A";
+    const colorClass = card.color === "red" ? "card-red" : "card-black";
 
     return (
-      <>
-        <div style={{ color }}>{card.name}</div>
-        <div style={{ fontSize: "30px", color }}>
-          {suits[card.suit]}
+      <div className={`card-face ${colorClass}`}>
+        <div className="card-corner top-left">
+          <span className="card-rank">{card.name}</span>
+          <span className="card-suit">{suits[card.suit]}</span>
         </div>
-      </>
+
+        <div className="card-corner bottom-right">
+          <span className="card-rank">{card.name}</span>
+          <span className="card-suit">{suits[card.suit]}</span>
+        </div>
+
+        <div className="card-center">
+          {isFaceCard ? (
+            <div className="card-face-portrait">
+              <span className="card-face-letter">{card.name}</span>
+              <span className="card-face-title">
+                {card.name === "J"
+                  ? "Jack"
+                  : card.name === "Q"
+                  ? "Queen"
+                  : "King"}
+              </span>
+            </div>
+          ) : isAce ? (
+            <div className="card-ace">
+              <span className="card-ace-symbol">{suits[card.suit]}</span>
+            </div>
+          ) : (
+            <div className="card-pips">
+              {Array.from({ length: Math.min(card.rank, 10) }).map((_, index) => (
+                <span key={index} className="card-pip">
+                  {suits[card.suit]}
+                </span>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
     );
   }
 
