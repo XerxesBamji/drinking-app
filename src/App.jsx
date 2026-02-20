@@ -369,10 +369,30 @@ function App() {
                   )}
                   {stage === 4 && (
                     <>
-                      <button onClick={() => handleSuitGuess("hearts")}>♥</button>
-                      <button onClick={() => handleSuitGuess("diamonds")}>♦</button>
-                      <button onClick={() => handleSuitGuess("clubs")}>♣</button>
-                      <button onClick={() => handleSuitGuess("spades")}>♠</button>
+                      <button
+                        className="suit-btn"
+                        onClick={() => handleSuitGuess("hearts")}
+                      >
+                        ♥
+                      </button>
+                      <button
+                        className="suit-btn"
+                        onClick={() => handleSuitGuess("diamonds")}
+                      >
+                        ♦
+                      </button>
+                      <button
+                        className="suit-btn"
+                        onClick={() => handleSuitGuess("clubs")}
+                      >
+                        ♣
+                      </button>
+                      <button
+                        className="suit-btn"
+                        onClick={() => handleSuitGuess("spades")}
+                      >
+                        ♠
+                      </button>
                     </>
                   )}
                 </div>

@@ -354,9 +354,9 @@ input {
 }
 
 .btn-black {
-  background: linear-gradient(135deg, #1f1f1f, #333);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   color: white;
-  border: 2px solid white;
 }
 
 .btn-blue {
@@ -367,6 +367,22 @@ input {
 .btn-purple {
   background: linear-gradient(135deg, #7928ca, #ff0080);
   color: white;
+}
+
+/* Suit buttons (stage 4) */
+.suit-btn {
+  padding: 8px 14px;
+  font-size: 18px;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+@media (max-width: 480px) {
+  .suit-btn {
+    padding: 6px 10px;
+    font-size: 16px;
+    margin: 4px;
+  }
 }
 
 /* ============================= */
