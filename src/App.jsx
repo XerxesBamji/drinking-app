@@ -196,28 +196,34 @@ function App() {
               </button>
               {rulesExpanded && (
                 <div className="rules-content">
-                  <ul>
-                    <li>
+                  <ul className="text-left">
+                    <li className="mt-1">
                       	•	2+ players. One dealer, others take turns.
                     </li>
-                    <li>
+                    <li className="mt-1">
                       •	Answer correctly to move to the next stage.
                     </li>
-                    <li>
+                    <li className="mt-1">
                       •	Wrong answer? Take 2 sips and the cards reset and it moves to the next player.
                     </li>
                   </ul>
-                  <p>
+                  <p className="font-bold text-left mt-3">
                     Stages:
-Red/Black → Higher/Lower → Inside/Outside → Suit
                   </p>
-                  <p>
+                  <p className="text-left">
+                    1. Red/Black → 2.Higher/Lower → 3.Inside/Outside → 4.Suit
+                  </p>
+                  <p className="font-bold text-left mt-3">
                     Get all 4 correct?
-The dealer finishes their drink and you become the new dealer.
                   </p>
-                  <p>
+                  <p className="text-left">
+                    The dealer finishes their drink and you become the new dealer.
+                  </p>
+                  <p className="font-bold text-left mt-3">
                     If the dealer finishes the whole deck without anyone completing all 4:
-Everyone else finishes their drink and the dealer stays.
+                  </p>
+                  <p className="text-left">
+                    Everyone else finishes their drink and the dealer stays.
                   </p>
                 </div>
               )}

@@ -399,6 +399,7 @@ input {
 .rules-toggle:hover {
   background: rgba(255, 255, 255, 0.05);
   border: none;
+  transform: scale(1.01);
 }
 
 .rules-arrow {
