@@ -18,6 +18,7 @@ function App() {
   const [flipped, setFlipped] = useState(false);
   const [isResolving, setIsResolving] = useState(false);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
+  const [rulesExpanded, setRulesExpanded] = useState(false);
 
   const currentPlayer = players[currentPlayerIndex];
   const dealerName = players[dealerIndex];
@@ -180,8 +181,25 @@ function App() {
             </div>
 
             <p className="text-sm opacity-70 mt-2">
-              Tap a player to choose dealer (or leave blank for random)
+              Tap a player to choose a dealer or leave blank for a random pick.
             </p>
+
+            <div className="rules-panel w-full mt-6">
+              <button
+                className="rules-toggle"
+                onClick={() => setRulesExpanded(!rulesExpanded)}
+              >
+                <span>Game Rules</span>
+                <span className={`rules-arrow ${rulesExpanded ? "expanded" : ""}`}>
+                  ▼
+                </span>
+              </button>
+              {rulesExpanded && (
+                <div className="rules-content">
+                  {/* Rules text will be added here later */}
+                </div>
+              )}
+            </div>
 
             <div className="flex w-full gap-2 mt-6">
               <input

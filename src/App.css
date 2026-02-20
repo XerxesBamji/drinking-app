@@ -368,3 +368,62 @@ input {
   background: linear-gradient(135deg, #7928ca, #ff0080);
   color: white;
 }
+
+/* ============================= */
+/* RULES PANEL */
+/* ============================= */
+
+.rules-panel {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rules-toggle {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+  margin: 0;
+}
+
+.rules-toggle:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+}
+
+.rules-arrow {
+  transition: transform 0.3s ease;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.rules-arrow.expanded {
+  transform: rotate(180deg);
+}
+
+.rules-content {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
