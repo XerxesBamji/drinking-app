@@ -185,13 +185,19 @@ function App() {
 
             <div className="flex w-full gap-2 mt-6">
               <input
-                  className="flex-1 rounded-2xl border-2 border-white px-3 py-2"
-                  value={newPlayerName}
-                  placeholder="Enter player name"
-                  onChange={(e) => setNewPlayerName(e.target.value)}
-                  id="playerName"
-                  name="playerName"
-                />
+                className="flex-1 rounded-2xl border-2 border-white px-3 py-2"
+                value={newPlayerName}
+                placeholder="Enter player name"
+                onChange={(e) => setNewPlayerName(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    addPlayer();
+                  }
+                }}
+                id="playerName"
+                name="playerName"
+              />
               <button onClick={addPlayer}>Add</button>
             </div>
 
