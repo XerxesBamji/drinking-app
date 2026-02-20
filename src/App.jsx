@@ -240,6 +240,12 @@ function App() {
                     <li className="mt-1">
                       •	Wrong answer? Take 2 sips and the cards reset and it moves to the next player.
                     </li>
+                    <li className="mt-1">
+                      Ace is always low.
+                    </li>
+                    <li className="mt-1">
+                      Any duplicate number will count as a loss.
+                    </li>
                   </ul>
                   <p className="font-bold text-left mt-3">
                     Stages:
