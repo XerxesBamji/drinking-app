@@ -196,7 +196,29 @@ function App() {
               </button>
               {rulesExpanded && (
                 <div className="rules-content">
-                  {/* Rules text will be added here later */}
+                  <ul>
+                    <li>
+                      	•	2+ players. One dealer, others take turns.
+                    </li>
+                    <li>
+                      •	Answer correctly to move to the next stage.
+                    </li>
+                    <li>
+                      •	Wrong answer? Take 2 sips and the cards reset and it moves to the next player.
+                    </li>
+                  </ul>
+                  <p>
+                    Stages:
+Red/Black → Higher/Lower → Inside/Outside → Suit
+                  </p>
+                  <p>
+                    Get all 4 correct?
+The dealer finishes their drink and you become the new dealer.
+                  </p>
+                  <p>
+                    If the dealer finishes the whole deck without anyone completing all 4:
+Everyone else finishes their drink and the dealer stays.
+                  </p>
                 </div>
               )}
             </div>
