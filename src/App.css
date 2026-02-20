@@ -377,6 +377,10 @@ input {
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
+.suit-btn:hover {
+  transform: scale(1.01);
+}
+
 @media (max-width: 480px) {
   .suit-btn {
     padding: 6px 10px;
