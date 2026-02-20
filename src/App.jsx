@@ -239,6 +239,21 @@ function App() {
               <img src={logo} alt="Red or Black Logo" className="game-logo game-logo-small" />
             </div>
 
+            <div className="text-sm opacity-80 mb-4">
+              {dealerName && (
+                <div>
+                  <span className="opacity-70">Dealer: </span>
+                  <span className="font-semibold">{dealerName}</span>
+                </div>
+              )}
+              {currentPlayer && (
+                <div className="mt-1">
+                  <span className="opacity-70">Current player: </span>
+                  <span className="font-semibold">{currentPlayer}</span>
+                </div>
+              )}
+            </div>
+
             <div className="grid grid-cols-[auto,auto] md:flex md:flex-row justify-center md:justify-between items-center md:items-start md:gap-10 gap-2">
 
               <div className="flex flex-col items-center col-span-1 col-start-1 row-start-1">
@@ -309,7 +324,6 @@ function App() {
                     </>
                   )}
                 </div>
-
             {alert && (
               <div className={`custom-alert ${alert.type}`}>
                 {alert.message}
