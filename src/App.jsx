@@ -239,16 +239,16 @@ function App() {
               <img src={logo} alt="Red or Black Logo" className="game-logo game-logo-small" />
             </div>
 
-            <div className="flex md:flex-row flex-col justify-between items-center md:items-start md:gap-10 gap-6">
+            <div className="grid grid-cols-[auto,auto] md:flex md:flex-row justify-center md:justify-between items-center md:items-start md:gap-10 gap-2">
 
-              <div>
+              <div className="flex flex-col items-center col-span-1 col-start-1 row-start-1">
                 <div className="deck">🂠</div>
                 <div className="text-xs opacity-70 mt-2">
                   DECK ({deck.length})
                 </div>
               </div>
 
-              <div className="flex-1 text-center">
+              <div className="flex-1 text-center col-span-2 row-start-2 md:row-auto md:col-span-auto">
                 <div className="flex justify-center gap-4 flex-wrap mb-6">
                   {revealed.map((card, i) => (
                     <div key={i} className="card revealed">
@@ -269,7 +269,7 @@ function App() {
                 </div>
               </div>
 
-              <div>
+              <div className="flex flex-col items-center col-span-1 col-start-2 row-start-1 justify-self-end md:justify-self-auto">
                 <div className="discard-stack">
                   {discard.length > 0 && (
                     <div className="discard-card top">🂠</div>
