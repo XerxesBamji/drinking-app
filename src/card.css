@@ -1,0 +1,95 @@
+.lux-card {
+  width: 140px;
+  height: 200px;
+  border-radius: 16px;
+  padding: 3px;
+
+  background: linear-gradient(145deg, #c8a74e, #f5d67a, #a67c1b);
+  box-shadow:
+    0 0 30px rgba(255, 200, 90, 0.4),
+    inset 0 0 10px rgba(0,0,0,0.6);
+}
+
+.lux-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+
+  background:
+    radial-gradient(circle at center, #1a1a1a 0%, #0d0d0d 70%);
+  
+  box-shadow:
+    inset 0 0 20px rgba(0,0,0,0.8),
+    inset 0 0 5px rgba(255,215,0,0.3);
+
+  font-family: 'Cinzel', serif;
+}
+
+.lux-corner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.lux-corner.top {
+  top: 10px;
+  left: 10px;
+}
+
+.lux-corner.bottom {
+  bottom: 10px;
+  right: 10px;
+  transform: rotate(180deg);
+}
+
+.lux-value {
+  font-size: 18px;
+}
+
+.lux-suit {
+  font-size: 20px;
+}
+
+.lux-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 60px;
+}
+
+/* Scale down when used inside game card wrapper */
+.card .lux-card .lux-value {
+  font-size: clamp(10px, 2.2vw, 18px);
+}
+
+.card .lux-card .lux-suit {
+  font-size: clamp(10px, 2.5vw, 20px);
+}
+
+.card .lux-card .lux-center {
+  font-size: clamp(20px, 6vw, 60px);
+}
+
+/* GOLD SUITS */
+.spades,
+.clubs {
+  background: linear-gradient(#f5d67a, #a67c1b);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 6px rgba(255,215,0,0.6);
+}
+
+/* RED SUITS */
+.hearts,
+.diamonds {
+  background: linear-gradient(#ff3b3b, #b30000);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 6px rgba(255,0,0,0.6);
+}

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createDeck, shuffleDeck } from "./game/deck";
 import logo from "./assets/logo.png";
+import Card from "./card";
 import "./App.css";
 
 function App() {
@@ -150,60 +151,6 @@ function App() {
     const card = drawCard();
     if (!card) return;
     resolveCard(card, card.suit === suit, 5);
-  }
-
-  function renderCardFace(card) {
-    const suits = {
-      hearts: "♥",
-      diamonds: "♦",
-      clubs: "♣",
-      spades: "♠",
-    };
-
-    const isFaceCard = ["J", "Q", "K"].includes(card.name);
-    const isAce = card.name === "A";
-    const colorClass = card.color === "red" ? "card-red" : "card-black";
-
-    return (
-      <div className={`card-face ${colorClass}`}>
-        <div className="card-corner top-left">
-          <span className="card-rank">{card.name}</span>
-          <span className="card-suit">{suits[card.suit]}</span>
-        </div>
-
-        <div className="card-corner bottom-right">
-          <span className="card-rank">{card.name}</span>
-          <span className="card-suit">{suits[card.suit]}</span>
-        </div>
-
-        <div className="card-center">
-          {isFaceCard ? (
-            <div className="card-face-portrait">
-              <span className="card-face-letter">{card.name}</span>
-              <span className="card-face-title">
-                {card.name === "J"
-                  ? "Jack"
-                  : card.name === "Q"
-                  ? "Queen"
-                  : "King"}
-              </span>
-            </div>
-          ) : isAce ? (
-            <div className="card-ace">
-              <span className="card-ace-symbol">{suits[card.suit]}</span>
-            </div>
-          ) : (
-            <div className="card-pips">
-              {Array.from({ length: Math.min(card.rank, 10) }).map((_, index) => (
-                <span key={index} className="card-pip">
-                  {suits[card.suit]}
-                </span>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -362,7 +309,7 @@ function App() {
                 <div className="flex justify-center gap-4 flex-wrap my-6">
                   {revealed.map((card, i) => (
                     <div key={i} className="card revealed">
-                      {renderCardFace(card)}
+                      <Card value={card.name} suit={card.suit} />
                     </div>
                   ))}
 
@@ -371,7 +318,7 @@ function App() {
                       <div className="card-inner">
                         <div className="card-front">🂠</div>
                         <div className="card-back">
-                          {renderCardFace(activeCard)}
+                          <Card value={activeCard.name} suit={activeCard.suit} />
                         </div>
                       </div>
                     </div>
