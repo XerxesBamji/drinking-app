@@ -80,10 +80,13 @@ function App() {
 
         if (nextStageIfCorrect === 5) {
           showAlert(`${currentPlayer} completed the row! 🎉`, "success");
+          setDealerIndex(currentPlayerIndex); // Winner becomes the new dealer
           setTimeout(() => {
             setRevealed([]);
             setStage(1);
-            nextPlayer();
+            // Next player is the person after the new dealer (winner); set explicitly so we don't use stale dealerIndex
+            const nextIndex = (currentPlayerIndex + 1) % players.length;
+            setCurrentPlayerIndex(nextIndex);
           }, 900);
         } else {
           setStage(nextStageIfCorrect);
