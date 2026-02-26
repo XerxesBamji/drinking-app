@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createDeck, shuffleDeck } from "./game/deck";
 import logo from "./assets/logo.png";
+import deckLogo from "./assets/deckLogo.png";
 import Card from "./card";
 import "./App.css";
 
@@ -280,6 +281,13 @@ function App() {
             <div className="logo-wrapper mb-6">
               <img src={logo} alt="Red or Black Logo" className="game-logo game-logo-small" />
             </div>
+
+            <div className="">
+                <span className="font-semibold">Ace is always low. </span>
+              </div>
+              <div className="">
+                <span className="font-semibold">Any duplicate number will count as a loss.</span>
+              </div>
 
             <div className="text-sm opacity-80 my-6">
               {dealerName && (

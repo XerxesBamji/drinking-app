@@ -56,8 +56,6 @@ h1, h2, h3 {
   height: 100%;
   min-width: 0;
   min-height: 0;
-  flex: 1 1 0;
-  align-self: stretch;
 }
 
 /* Flip structure */
@@ -86,6 +84,16 @@ h1, h2, h3 {
   flex-direction: column;
 }
 
+/* Let lux-card fill the entire card area when used in game */
+.card-back .lux-card,
+.card.revealed .lux-card {
+  flex: 1 1 0;
+  align-self: stretch;
+  min-width: 0;
+  min-height: 0;
+  width: 100%;
+  height: 100%;
+}
 
 /* Card back design */
 .card-front {
