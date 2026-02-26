@@ -21,6 +21,7 @@ function App() {
   const [isResolving, setIsResolving] = useState(false);
   const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
   const [rulesExpanded, setRulesExpanded] = useState(false);
+  const [deckEmpty, setDeckEmpty] = useState(false);
 
   const currentPlayer = players[currentPlayerIndex];
   const dealerName = players[dealerIndex];
@@ -58,9 +59,17 @@ function App() {
   }
 
   function drawCard() {
-    if (deck.length === 0) return null;
+    if (deck.length === 0) {
+      setDeckEmpty(true);
+      return null;
+    }
     const newDeck = [...deck];
     const card = newDeck.shift();
+
+    if (newDeck.length === 0) {
+      setDeckEmpty(true);
+    }
+
     setDeck(newDeck);
     setActiveCard(card);
     setFlipped(false);
@@ -82,11 +91,13 @@ function App() {
 
         if (nextStageIfCorrect === 5) {
           showAlert(`${currentPlayer} has won! 🎉 ${dealerName} down your drink`, "success");
-          setDealerIndex(currentPlayerIndex); // Winner becomes the new dealer
+          setDealerIndex(currentPlayerIndex);
           setTimeout(() => {
+            const shuffled = shuffleDeck(createDeck());
+            setDeck(shuffled);
+            setDiscard([]);
             setRevealed([]);
             setStage(1);
-            // Next player is the person after the new dealer (winner); set explicitly so we don't use stale dealerIndex
             const nextIndex = (currentPlayerIndex + 1) % players.length;
             setCurrentPlayerIndex(nextIndex);
           }, 900);
@@ -278,6 +289,36 @@ function App() {
         ) : (
           <div className="text-center">
 
+            {/* Deck Empty Modal */}
+            {deckEmpty && (
+              <div className="fixed inset-0 flex items-center justify-center bg-black/70 z-50">
+                <div className="bg-white text-black rounded-3xl p-10 text-center max-w-sm mx-4 shadow-2xl">
+                  <div className="text-6xl mb-4">🃏</div>
+                  <h2 className="text-3xl font-bold mb-2">Deck Empty!</h2>
+                  <p className="text-gray-600 mb-6">
+                    Nobody completed all 4 stages —{" "}
+                    <strong>everyone else finishes their drink!</strong> The dealer stays.
+                  </p>
+                  <button
+                    className="start-button w-full"
+                    onClick={() => {
+                      const shuffled = shuffleDeck(createDeck());
+                      setDeck(shuffled);
+                      setDeckEmpty(false);
+                      setRevealed([]);
+                      setDiscard([]);
+                      setStage(1);
+                      setActiveCard(null);
+                      const firstPlayer = (dealerIndex + 1) % players.length;
+                      setCurrentPlayerIndex(firstPlayer);
+                    }}
+                  >
+                    Play Again
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="logo-wrapper mb-6">
               <img src={logo} alt="Red or Black Logo" className="game-logo game-logo-small" />
             </div>
@@ -342,7 +383,6 @@ function App() {
                 </div>
                 <div className="text-xs opacity-70 mt-2">DISCARD ({discard.length})</div>
               </div>
-              
 
             </div>
 
