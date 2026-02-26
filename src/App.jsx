@@ -81,7 +81,7 @@ function App() {
         setRevealed((prev) => [...prev, card]);
 
         if (nextStageIfCorrect === 5) {
-          showAlert(`${currentPlayer} completed the row! 🎉`, "success");
+          showAlert(`${currentPlayer} has won! 🎉 ${dealerName} down your drink`, "success");
           setDealerIndex(currentPlayerIndex); // Winner becomes the new dealer
           setTimeout(() => {
             setRevealed([]);
