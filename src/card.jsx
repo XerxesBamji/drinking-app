@@ -9,25 +9,27 @@ const suitSymbols = {
 };
 
 export default function Card({ value, suit }) {
+  const displayValue = value ?? "?";
+  const displaySuit = suit ?? "hearts";
   return (
     <div className="lux-card">
       <div className="lux-inner">
 
         {/* Top Left */}
-        <div className={`lux-corner top ${suit}`}>
-          <span className="lux-value">{value}</span>
-          <span className="lux-suit">{suitSymbols[suit]}</span>
+        <div className={`lux-corner top ${displaySuit}`}>
+          <span className="lux-value">{displayValue}</span>
+          <span className="lux-suit">{suitSymbols[displaySuit]}</span>
         </div>
 
         {/* Center */}
-        <div className={`lux-center ${suit}`}>
-          {suitSymbols[suit]}
+        <div className={`lux-center ${displaySuit}`}>
+          {suitSymbols[displaySuit]}
         </div>
 
         {/* Bottom Right */}
-        <div className={`lux-corner bottom ${suit}`}>
-          <span className="lux-value">{value}</span>
-          <span className="lux-suit">{suitSymbols[suit]}</span>
+        <div className={`lux-corner bottom ${displaySuit}`}>
+          <span className="lux-value">{displayValue}</span>
+          <span className="lux-suit">{suitSymbols[displaySuit]}</span>
         </div>
 
       </div>

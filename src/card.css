@@ -1,4 +1,5 @@
 .lux-card {
+  box-sizing: border-box;
   width: 140px;
   height: 200px;
   border-radius: 16px;
@@ -72,6 +73,16 @@
 
 .card .lux-card .lux-center {
   font-size: clamp(20px, 6vw, 60px);
+}
+
+/* Hearts glyph is visually taller, so nudge it down and shrink slightly
+   to create more space from the top-left heart, especially on face cards. */
+.lux-center.hearts {
+  top: 52%;
+}
+
+.card .lux-card .lux-center.hearts {
+  font-size: clamp(18px, 5.2vw, 54px);
 }
 
 /* GOLD SUITS */
